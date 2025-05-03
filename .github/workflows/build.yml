@@ -63,13 +63,12 @@ jobs:
           zip -r Aliensevka.zip .
 
       - name: Release
-        working-directory: ./iosevka
         uses: softprops/action-gh-release@v2
         # if: github.ref_type == 'tag'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: dist/Aliensevka.zip
+          files: ./iosevka/dist/Aliensevka.zip
           body: 'This is the first release of Aliensevka'
       # - name: Create release
       #   uses: actions/create-release@v1
