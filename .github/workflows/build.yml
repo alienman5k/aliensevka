@@ -62,20 +62,28 @@ jobs:
           cd dist/Aliensevka
           zip -r Aliensevka.zip .
 
-      - name: Create release
-        uses: actions/create-release@v1
-        with:
-          tag_name: 'v1.0'
-          release_name: 'v1.0'
-          body: 'This is the first release of Aliensevka'
-          draft: false
-          prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload fonts as release assets
-        uses: actions/upload-release-asset@v1
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        # if: github.ref_type == 'tag'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          UPLOAD_URL: ${{ steps.create-release.outputs.upload_url }}
-          ASSET_NAME: 'Aliensevka.zip'
-          ASSET_PATH: ./iosevka/dist/Aliensevka/Aliensevka.zip
+        with:
+          files: dist/Aliensevka.zip
+          body: 'This is the first release of Aliensevka'
+      # - name: Create release
+      #   uses: actions/create-release@v1
+      #   with:
+      #     tag_name: 'v1.0'
+      #     release_name: 'v1.0'
+      #     body: 'This is the first release of Aliensevka'
+      #     draft: false
+      #     prerelease: false
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Upload fonts as release assets
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     UPLOAD_URL: ${{ steps.create-release.outputs.upload_url }}
+      #     ASSET_NAME: 'Aliensevka.zip'
+      #     ASSET_PATH: ./iosevka/dist/Aliensevka/Aliensevka.zip
