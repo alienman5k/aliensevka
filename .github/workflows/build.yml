@@ -63,6 +63,7 @@ jobs:
           zip -r Aliensevka.zip .
 
       - name: Release
+        working-directory: ./iosevka
         uses: softprops/action-gh-release@v2
         # if: github.ref_type == 'tag'
         env:
