@@ -32,12 +32,14 @@ jobs:
           path: ''
           ref: 'v33.2.2'
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '23.x'`
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Configure NPM
+        run: npm ci
+
+      - name: Build with NPM
+        run: npm run build -- ttf-unhinted::Aliensevka 
+

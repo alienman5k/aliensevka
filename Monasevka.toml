@@ -1,0 +1,52 @@
+# Monasevka custom build of Iosevka
+[buildPlans.Monasevka]
+family = "Monasevka"
+spacing = "term"
+serifs = "sans"
+noCvSs = true
+exportGlyphNames = false
+
+  [buildPlans.Monasevka.variants]
+  inherits = "ss07"
+
+  [buildPlans.Monasevka.ligations]
+  inherits = "clike"
+
+[buildPlans.Monasevka.weights.Regular]
+shape = 400
+menu = 400
+css = 400
+
+[buildPlans.Monasevka.weights.Bold]
+shape = 700
+menu = 700
+css = 700
+
+[buildPlans.Monasevka.widths.Normal]
+shape = 500
+menu = 5
+css = "normal"
+
+[buildPlans.Monasevka.widths.Extended]
+shape = 600
+menu = 7
+css = "expanded"
+
+[buildPlans.Monasevka.widths.SemiExtended]
+shape = 548
+menu = 6
+css = "semi-expanded"
+
+[buildPlans.Monasevka.slopes.Upright]
+angle = 0
+shape = "upright"
+menu = "upright"
+css = "normal"
+
+[buildPlans.Monasevka.slopes.Italic]
+angle = 9.4
+shape = "italic"
+menu = "italic"
+css = "italic"
+
+
