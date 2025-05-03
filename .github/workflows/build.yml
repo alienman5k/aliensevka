@@ -25,29 +25,35 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
         uses: actions/checkout@v4
-      - run: pwd
-      - run: ls -la
+      # - run: pwd
+      # - run: ls -la
 
       - name: Checkout Iosevka
         uses: actions/checkout@v4
         with:
           repository: 'be5invis/Iosevka'
-          path: ''
+          path: 'iosevka'
           ref: 'v33.2.2'
-      - run: pwd
-      - run: ls -la
+      # - run: pwd
+      # - run: ls -la
+
+      - name: Copy build plan
+        run: cp private-build-plans.toml iosevka/
 
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
           node-version: '23.x'
+        working-directory: ./iosevka
 
       - name: Configure NPM
         run: npm ci
+        working-directory: ./iosevka
 
       - run: pwd
       - run: ls -la
 
       - name: Build with NPM
         run: npm run build -- ttf-unhinted::Aliensevka 
+        working-directory: ./iosevka
 
