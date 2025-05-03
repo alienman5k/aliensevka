@@ -62,14 +62,20 @@ jobs:
           cd dist/Aliensevka
           zip -r Aliensevka.zip .
 
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        # if: github.ref_type == 'tag'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
-          files: ./iosevka/dist/Aliensevka.zip
-          body: 'This is the first release of Aliensevka'
+          name: Aliensevka.zip
+          path: iosevka/dist/Aliensevka.zip
+
+      # - name: Release
+      #   uses: softprops/action-gh-release@v2
+      #   # if: github.ref_type == 'tag'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     files: ./iosevka/dist/Aliensevka.zip
+      #     body: 'This is the first release of Aliensevka'
       # - name: Create release
       #   uses: actions/create-release@v1
       #   with:
