@@ -62,14 +62,14 @@ jobs:
           cd dist/Aliensevka
           zip -r Aliensevka.zip .
 
-      - run: pwd
-      - run: ls -la
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Aliensevka.zip
           path: iosevka/dist/Aliensevka/Aliensevka.zip
 
+      - run: pwd
+      - run: ls -la iosevka/dist/Aliensevka/
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
