@@ -3,11 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
+    # nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-24.11-darwin";
     # flake-utils for cross-platform support
     flake-utils.url = "github:numtide/flake-utils";
     iosevka = {
-      url = "github:be5invis/iosevka";
-      ref = "v33.2.2";
+      url = "github:be5invis/iosevka?ref=v33.2.2";
       flake = false;
     };
   };
@@ -16,12 +16,23 @@
     {
       self,
       nixpkgs,
+      # nixpkgs-darwin,
       flake-utils,
+      iosevka
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        # pkgs = import nixpkgs { inherit system; };
+        # pkgs = if system == "x86_64-darwin" then nixpkgs-darwin else nixpkgs;
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            (self: super: {
+              nodejs = super.nodejs_23;
+            })
+          ];
+        };
       in
       {
         devShells = with pkgs; {
@@ -44,19 +55,19 @@
           };
         };
 
-        packages = with pkgs; {
-          default = buildNpmPackage {
-            pname = "aliensevka";
-            version = "0.0.1";
-            src = ./.;
-
-            npmDeps = importNpmLock {
-              npmRoot = ./.;
-            };
-
-            npmConfigHook = importNpmLock.npmConfigHook;
-          };
-        };
+        # packages = with pkgs; {
+        #   default = buildNpmPackage {
+        #     pname = "aliensevka";
+        #     version = "0.0.1";
+        #     src = ./.;
+        #
+        #     npmDeps = importNpmLock {
+        #       npmRoot = ./.;
+        #     };
+        #
+        #     npmConfigHook = importNpmLock.npmConfigHook;
+        #   };
+        # };
       }
     );
 }

@@ -37,6 +37,9 @@ jobs:
       - name: Install ttfautohint
         run: sudo apt-get update && sudo apt-get install -y ttfautohint
 
+      - name: Generate private build plan
+        run: sh ./generate_plan.sh
+
       - name: Copy build plan
         run: cp private-build-plans.toml iosevka/
 
@@ -60,11 +63,11 @@ jobs:
           cd dist/Aliensevka
           zip -r Aliensevka.zip .
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Aliensevka.zip
-          path: iosevka/dist/Aliensevka/Aliensevka.zip
+      # - name: Upload Artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: Aliensevka.zip
+      #     path: iosevka/dist/Aliensevka/Aliensevka.zip
 
       # - run: pwd
       # - run: ls -la iosevka/dist/Aliensevka/
@@ -76,30 +79,8 @@ jobs:
           asset_name: Aliensevka.zip
           tag: ${{ github.ref }}
           overwrite: true
-          body: 'This is the first release of Aliensevka'
-
-      # - name: Release
-      #   uses: softprops/action-gh-release@v2
-      #   # if: github.ref_type == 'tag'
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     files: ./iosevka/dist/Aliensevka.zip
-      #     body: 'This is the first release of Aliensevka'
-      # - name: Create release
-      #   uses: actions/create-release@v1
-      #   with:
-      #     tag_name: 'v1.0'
-      #     release_name: 'v1.0'
-      #     body: 'This is the first release of Aliensevka'
-      #     draft: false
-      #     prerelease: false
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Upload fonts as release assets
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     UPLOAD_URL: ${{ steps.create-release.outputs.upload_url }}
-      #     ASSET_NAME: 'Aliensevka.zip'
-      #     ASSET_PATH: ./iosevka/dist/Aliensevka/Aliensevka.zip
+          body: |
+            Version ${{ github.ref }} of Aliensevka
+            Changelog:
+            - at
+            - x

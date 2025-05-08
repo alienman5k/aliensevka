@@ -17,11 +17,12 @@ exportGlyphNames = false
     a = "double-storey-toothless-corner"
     # g = "double-storey"
     w = "rounded-vertical-sides-flat-top-motion-serifed"
+    x = "curly-serifless"
     tilde = "low"
     asterisk = "penta-low"
     underscore = "high"
     brace = "curly"
-    at = "fourfold"
+    at = "fourfold-solid-inner"
 
   [buildPlans.Aliensevka.ligations]
   inherits = "clike"
